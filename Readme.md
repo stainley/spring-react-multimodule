@@ -1,7 +1,7 @@
+<style>p{color:red;}</style>
+**Spring React Multi Module**
 
-**<font color="blue">Spring React Multi Module</font>**
-
-This SpringBoot project copy from the React module the static files into Spring directory
+<p>This SpringBoot project copy from the React module the static files into Spring directory</p>
 
     mvn spring-boot:run
 
