@@ -7,7 +7,7 @@ describe('Home Component Test', () => {
 
     it('should have AppNavbar', function () {
         render(<MemoryRouter><Home/></MemoryRouter>)
-
+        
         expect(screen.getByText('Clients')).toBeInTheDocument();
     });
 });

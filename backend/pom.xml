@@ -40,6 +40,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.4.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
