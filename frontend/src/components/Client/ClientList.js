@@ -3,6 +3,8 @@ import {Button, ButtonGroup, Container, Table} from "reactstrap";
 import {Link} from "react-router-dom";
 import AppNavbar from "../AppNavBar/AppNavbar";
 
+import {fetchAllClient, removeByIdClient} from '../../api/ClientApi';
+
 class ClientList extends Component {
 
     constructor(props) {
@@ -16,22 +18,16 @@ class ClientList extends Component {
     };
 
     async componentDidMount() {
-        const response = await fetch('/clients');
-        const body = await response.json();
+        const body = await fetchAllClient();
         this.setState({clients: body});
     }
 
     async remove(id) {
-        await fetch(`/clients/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(() => {
-            let updatedClients = [...this.state.clients].filter(i => i.id !== id);
-            this.setState({clients: updatedClients});
-        })
+        await removeByIdClient(id)
+            .then(() => {
+                let updatedClients = [...this.state.clients].filter(i => i.id !== id);
+                this.setState({clients: updatedClients});
+            });
     }
 
     render() {

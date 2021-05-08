@@ -6,6 +6,7 @@ import com.salapp.test.backend.model.Client;
 import com.salapp.test.backend.repositories.ClientRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,5 +47,12 @@ public class ClientControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.name", Matchers.is(expectedName)));
+
+    }
+
+    @Test
+    public void shouldDeleteClientSuccessfully() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/clients/id"));
     }
 }

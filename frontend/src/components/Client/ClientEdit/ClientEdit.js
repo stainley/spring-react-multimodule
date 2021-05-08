@@ -3,6 +3,8 @@ import {Link, withRouter} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
 import AppNavbar from "../../AppNavBar/AppNavbar";
 
+import {loadClientById, updateOrCreateClient} from '../../../api/ClientApi';
+
 class ClientEdit extends Component {
 
     emptyItem = {
@@ -22,7 +24,7 @@ class ClientEdit extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const client = await (await fetch(`/clients/${this.props.match.params.id}`)).json();
+            const client = await loadClientById(this.props);
             this.setState({item: client});
         }
     }
@@ -39,15 +41,7 @@ class ClientEdit extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         const {item} = this.state;
-
-        await fetch('/clients' + (item.id ? '/' + item.id : ''), {
-            method: (item.id) ? 'PUT' : 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item),
-        });
+        await  updateOrCreateClient(item);
         this.props.history.push('/clients');
     }
 
